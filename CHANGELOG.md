@@ -21,7 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Launcher module structure
 
 ### Fixed
-- Sink car's position in RVIZ bug
+- Robot model "sinks" in RVIZ
 
 ## [2.0.0] - 2021-11-16
 ### Added
