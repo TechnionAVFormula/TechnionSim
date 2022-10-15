@@ -3,21 +3,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.1.1] - 2022-10-12
+## [2.1.0] - 2022-10-12
 ### Added
 - Simulate Bounding Boxes plugin
 - Simulated multi-camera setup plugin 
 - Swapping cone colors in simulated_perception
+- Robot selection in launcher GUI
 
 ### Changed
-- new ADS DV mesh
-- Adjust sensors position for the ADS DV robot
-- Simulated perception now publishes to `/cones` topic
-- Base footprint's position adjusted
-- Added chassis link in robot urdf
+- New ADS DV mesh
+- Sensor positions for the ADS-DV robot
+- Simulated perception topic to `/cones` from `/fusion/cones`
+- `base_footprint` position adjusted
+- ` base_link` changed to `chassis`
 - Topic prefix for sensors
 - Revise track generation
-- Robot selection in launcher GUI
 - Launcher module structure
 
 ### Fixed
