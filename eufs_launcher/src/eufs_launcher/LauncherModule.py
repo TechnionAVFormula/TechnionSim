@@ -264,7 +264,8 @@ class EUFSLauncher(Plugin):
         model_config = self.MODEL_CONFIGS[self.MODEL_PRESET_MENU.currentText()]
         vehicle_model_config = f"vehicleModelConfig:={model_config}"
         robot_name = f"robot_name:={self.ROBOT_NAME_MENU.currentText()}"
-        launch_file = f"Launch file:={self.LAUNCH_FILE_SELECTOR.currentText()}"
+        launch_file_description = f"{self.LAUNCH_FILE_SELECTOR.currentText()}"
+        launch_file_description = launch_file_description.split('/')
         parameters_to_pass = [track_layout,
                               vehicle_model,
                               command_mode,
@@ -289,6 +290,7 @@ class EUFSLauncher(Plugin):
 
         # Here we launch `simulation.launch.py`.
         self.launch_with_args('eufs_launcher', 'simulation.launch.py', parameters_to_pass)
+        self.launch(launch_file_description[0], launch_file_description[1])
 
         # Trigger launch files hooked to checkboxes
         for checkbox, effect_on, effect_off in self.checkbox_effect_mapping:
@@ -305,8 +307,13 @@ class EUFSLauncher(Plugin):
         self.logger.info(f"Command: {' '.join(command)}")
         process = Popen(command)
         self.popens.append(process)
-        
+    
+    def launch(self, package, launch_file):
         # TODO (Khalid): This is where you would process all the other launch files
+        command = ["ros2", "launch", package, launch_file]
+        self.logger.info(f"Command: {' '.join(command)}")
+        process = Popen(command)
+        self.popens.append(process)
 
     def shutdown_plugin(self):
         """Kill all nodes."""
