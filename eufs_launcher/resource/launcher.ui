@@ -310,6 +310,21 @@
     <string>Refresh</string>
    </property>
   </widget>
+  <widget class="QComboBox" name="WhichLaunchFile">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>390</y>
+     <width>221</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>7</pointsize>
+    </font>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>
