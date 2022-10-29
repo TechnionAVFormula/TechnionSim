@@ -74,6 +74,10 @@ class EUFSLauncher(Plugin):
         self.COMMAND_MODE_MENU = self._widget.findChild(QComboBox, "WhichCommandMode")
         self.MODEL_PRESET_MENU = self._widget.findChild(QComboBox, "WhichModelPreset")
         self.ROBOT_NAME_MENU = self._widget.findChild(QComboBox, "WhichRobotName")
+        
+        # TODO (Khalid): Drop down menu to get all launch file stored in some shared directory
+        # TODO (Khalid): Get all launch file from shared directory and list them down in the drop down menu
+        self.LAUNCH_FILE_SELECTOR = self._widget.findChild(QComboBox, "WhichLaunchFile")
 
         # Check the file directory to update drop-down menu
         self.load_track_dropdowns()
@@ -88,7 +92,7 @@ class EUFSLauncher(Plugin):
         vehicle_models = [model.strip() for model in vehicle_models_]  # remove \n
         default_model = self.default_config["eufs_launcher"]["default_vehicle_model"]
         EUFSLauncher.setup_q_combo_box(self.VEHICLE_MODEL_MENU, default_model, vehicle_models)
-
+        
         # Setup Command Modes menu
         default_mode = self.default_config["eufs_launcher"]["default_command_mode"]
         modes = ["acceleration", "velocity"]
@@ -224,6 +228,8 @@ class EUFSLauncher(Plugin):
         for f in launch_files:
             if f != base_track:
                 self.TRACK_SELECTOR.addItem(f.split(".")[0])
+                
+
 
     def launch_button_pressed(self):
         """
@@ -283,6 +289,17 @@ class EUFSLauncher(Plugin):
         self.logger.info(f"Command: {' '.join(command)}")
         process = Popen(command)
         self.popens.append(process)
+        
+        # TODO (Khalid): This is where you would process all the other launch files
+        more_command = ["ros2", "run", "state_machine", "state_machine"]
+        self.logger.info(f"Command: {' '.join(more_command)}")
+        process_more = Popen(more_command)
+        self.popens.append(process_more)
+        
+        more_command = ["ros2", "launch", "ackermann_mux", "ackermann_mux.launch.py"]
+        self.logger.info(f"Command: {' '.join(more_command)}")
+        process_more = Popen(more_command)
+        self.popens.append(process_more)
 
     def shutdown_plugin(self):
         """Kill all nodes."""
