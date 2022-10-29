@@ -113,6 +113,17 @@ class EUFSLauncher(Plugin):
         robots_filepath = join(get_package_share_directory('eufs_racecar'), 'robots')
         modes = listdir(robots_filepath)
         EUFSLauncher.setup_q_combo_box(self.ROBOT_NAME_MENU, default_mode, modes)
+        
+        # Setup launch file options
+        packages = ["control_meta", "planning_meta"]
+        launch_files = []
+        
+        for package in packages:
+            launch_folder = join(get_package_share_directory(package), 'launch')
+            launch_files.extend([f"{package}/{file}" for file in listdir(launch_folder) if file.endswith("launch.py")])
+        
+        default_launch_file = self.default_config["eufs_launcher"]["default_launch_file"]
+        EUFSLauncher.setup_q_combo_box(self.LAUNCH_FILE_SELECTOR, default_launch_file, launch_files)
 
         # Add buttons from yaml file
         checkboxes = OrderedDict(
@@ -250,6 +261,7 @@ class EUFSLauncher(Plugin):
         model_config = self.MODEL_CONFIGS[self.MODEL_PRESET_MENU.currentText()]
         vehicle_model_config = f"vehicleModelConfig:={model_config}"
         robot_name = f"robot_name:={self.ROBOT_NAME_MENU.currentText()}"
+        launch_file = f"Launch file:={self.LAUNCH_FILE_SELECTOR.currentText()}"
         parameters_to_pass = [track_layout,
                               vehicle_model,
                               command_mode,
@@ -261,6 +273,7 @@ class EUFSLauncher(Plugin):
         self.logger.info(f"Command mode: {self.COMMAND_MODE_MENU.currentText()}")
         self.logger.info(f"Preset: {model_config}")
         self.logger.info(f"Robot description file: {self.ROBOT_NAME_MENU.currentText()}")
+        self.logger.info(f"Launch file: {self.LAUNCH_FILE_SELECTOR.currentText()}")
 
         # Get checkbox parameter information
         for checkbox, param_if_on, param_if_off in self.checkbox_parameter_mapping:
@@ -291,15 +304,6 @@ class EUFSLauncher(Plugin):
         self.popens.append(process)
         
         # TODO (Khalid): This is where you would process all the other launch files
-        more_command = ["ros2", "run", "state_machine", "state_machine"]
-        self.logger.info(f"Command: {' '.join(more_command)}")
-        process_more = Popen(more_command)
-        self.popens.append(process_more)
-        
-        more_command = ["ros2", "launch", "ackermann_mux", "ackermann_mux.launch.py"]
-        self.logger.info(f"Command: {' '.join(more_command)}")
-        process_more = Popen(more_command)
-        self.popens.append(process_more)
 
     def shutdown_plugin(self):
         """Kill all nodes."""
