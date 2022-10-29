@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Robot selection in launcher GUI
 
 ### Changed
-- New ADS DV mesh
+- New ADS-DV mesh
 - Sensor positions for the ADS-DV robot
 - Simulated perception topic to `/cones` from `/fusion/cones`
 - `base_footprint` position adjusted
