@@ -115,7 +115,10 @@ class EUFSLauncher(Plugin):
         EUFSLauncher.setup_q_combo_box(self.ROBOT_NAME_MENU, default_mode, modes)
         
         # Setup launch file options
-        packages = ["control_meta", "planning_meta"]
+        # TODO (Khalid): Add this to the config file
+        # TODO (Khalid): The default value does not correspond to the one in config cause there is a bug
+        #                in the setup_q_combo_box implmentation (particularly the first condition check)
+        packages = ["eufs_tracks", "control_meta", "planning_meta"]
         launch_files = []
         
         for package in packages:
