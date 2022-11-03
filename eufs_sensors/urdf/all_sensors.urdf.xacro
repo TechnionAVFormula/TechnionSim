@@ -8,6 +8,9 @@
   <!-- Velodyne VLP-16R -->
   <xacro:include filename="$(find eufs_sensors)/urdf/VLP-16R.urdf.xacro"/>
 
+  <!-- Magnetometer-->
+  <xacro:include filename="$(find eufs_sensors)/urdf/magnetometer.urdf.xacro"/>
+
   <!--IMU -->
   <xacro:include filename="$(find eufs_sensors)/urdf/imu.urdf.xacro"/>
 

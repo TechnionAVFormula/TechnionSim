@@ -74,5 +74,9 @@
     <xacro:sensor_imu parent="chassis" prefix="zed_imu" topic_prefix="/camera">
         <origin xyz="0.334 0.0 0.295" rpy="0 ${10.15*M_PI/180.0} 0"/>
     </xacro:sensor_imu>
+    
+    <xacro:sensor_magnetometer parent="base_footprint" prefix="sbg">
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+    </xacro:sensor_magnetometer>
 
 </robot>
