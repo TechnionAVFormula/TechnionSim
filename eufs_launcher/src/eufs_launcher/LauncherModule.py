@@ -125,7 +125,7 @@ class EUFSLauncher(Plugin):
             launch_folder = join(get_package_share_directory(package), 'launch')
             launch_files.extend([f"{package}/{file}" for file in listdir(launch_folder) if file.endswith("launch.py")])
         
-        # TODO (Khalid): Defaults to none
+        # TODO (Khalid): Defaults to none if nobody wants to launch any custom launch file
         default_launch_file = self.default_config["eufs_launcher"]["default_launch_file"]
         EUFSLauncher.setup_q_combo_box(self.LAUNCH_FILE_SELECTOR, default_launch_file, launch_files)
 
