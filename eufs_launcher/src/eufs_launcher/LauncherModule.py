@@ -115,21 +115,9 @@ class EUFSLauncher(Plugin):
         EUFSLauncher.setup_q_combo_box(self.ROBOT_NAME_MENU, default_mode, modes)
         
         # Setup launch file options
-        # TODO (Khalid): Add this to the config file
-        # TODO (Khalid): The default value does not correspond to the one in config cause there is a bug
-        #                in the setup_q_combo_box implmentation (particularly the first condition check)
-        packages = self.default_config["eufs_launcher"]["packages"]
         launch_files = []
-
         custom_launch_folder = join(get_package_share_directory('eufs_launcher'), 'custom_launch_files')
-        for file in listdir(custom_launch_folder):
-            launch_files.append(f"{file}")
-        
-        # for package in packages:
-        #     launch_folder = join(get_package_share_directory(package), 'launch')
-        #     launch_files.extend([f"{package}/{file}" for file in listdir(launch_folder) if file.endswith("launch.py")])
-        
-        # TODO (Khalid): Defaults to none if nobody wants to launch any custom launch file
+        launch_files.extend([file for file in listdir(custom_launch_folder) if file.endswith("launch.py")]) 
         default_launch_file = self.default_config["eufs_launcher"]["default_launch_file"]
         EUFSLauncher.setup_q_combo_box(self.LAUNCH_FILE_SELECTOR, default_launch_file, launch_files)
 
@@ -219,6 +207,7 @@ class EUFSLauncher(Plugin):
     @staticmethod
     def setup_q_combo_box(q_combo_box, default_mode, modes):
         q_combo_box.clear()
+        # None option is added for the use of launch files selector
         if default_mode == "None":
             q_combo_box.addItem(default_mode)
         if default_mode in modes:
@@ -295,9 +284,9 @@ class EUFSLauncher(Plugin):
                 self.logger.info(f"Checkbox disabled: {param_if_off}")
                 parameters_to_pass.extend(param_if_off)
 
-        # Here we launch `simulation.launch.py`.
+        # Here we launch `simulation.launch.py` and custom launch files if it is not None.
         self.launch_with_args('eufs_launcher', 'simulation.launch.py', parameters_to_pass)
-        self.launch(launch_file_description)
+        self.roslaunch_launch_file(launch_file_description)
 
         # Trigger launch files hooked to checkboxes
         for checkbox, effect_on, effect_off in self.checkbox_effect_mapping:
@@ -315,12 +304,19 @@ class EUFSLauncher(Plugin):
         process = Popen(command)
         self.popens.append(process)
     
-    def launch(self, launch_file):
-        # TODO (Khalid): This is where you would process all the other launch files
-        command = ["ros2", "launch", "eufs_launcher", launch_file]
-        self.logger.info(f"Command: {' '.join(command)}")
-        process = Popen(command)
-        self.popens.append(process)
+    def roslaunch_launch_file(self, launch_file):
+        """
+        Launches custom launch file
+
+        Custom launch files should be placed inside the "custom_launch_files" folder.
+        """
+        if launch_file == "None":
+            self.logger.info(f"No additional launch file will be launched.")
+        else:
+            command = ["ros2", "launch", "eufs_launcher", launch_file]
+            self.logger.info(f"Command: {' '.join(command)}")
+            process = Popen(command)
+            self.popens.append(process)
 
     def shutdown_plugin(self):
         """Kill all nodes."""

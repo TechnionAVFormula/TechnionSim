@@ -20,8 +20,6 @@ eufs_launcher:
 
   # Default launch file to be selected in the launcher drop-down menu
   default_launch_file: "None"
-  # "control_meta/control.launch.py"
-
   # percent of possible noise pixels being utilized
   object_noise_default: 0
 
@@ -82,11 +80,3 @@ eufs_launcher:
       parameter_triggering:
         if_on: { "pub_ground_truth:=true" }
         if_off: { "pub_ground_truth:=false" }
-
-  packages:
-    - control_meta
-    - planning_meta
-    - mpc_controller_py
-    - parameter_auto_tuner
-    - parameter_changer
-    - pure_pursuit_controller
