@@ -73,10 +73,7 @@ class EUFSLauncher(Plugin):
         self.VEHICLE_MODEL_MENU = self._widget.findChild(QComboBox, "WhichVehicleModel")
         self.COMMAND_MODE_MENU = self._widget.findChild(QComboBox, "WhichCommandMode")
         self.MODEL_PRESET_MENU = self._widget.findChild(QComboBox, "WhichModelPreset")
-        self.ROBOT_NAME_MENU = self._widget.findChild(QComboBox, "WhichRobotName")
-        
-        # TODO (Khalid): Drop down menu to get all launch file stored in some shared directory
-        # TODO (Khalid): Get all launch file from shared directory and list them down in the drop down menu
+        self.ROBOT_NAME_MENU = self._widget.findChild(QComboBox, "WhichRobotName") 
         self.LAUNCH_FILE_SELECTOR = self._widget.findChild(QComboBox, "WhichLaunchFile")
 
         # Check the file directory to update drop-down menu
