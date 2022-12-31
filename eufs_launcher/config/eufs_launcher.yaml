@@ -19,7 +19,8 @@ eufs_launcher:
   default_robot_name: "eufs"
 
   # Default launch file to be selected in the launcher drop-down menu
-  default_launch_file: "control_meta/control.launch.py"
+  default_launch_file: "None"
+  # "control_meta/control.launch.py"
 
   # percent of possible noise pixels being utilized
   object_noise_default: 0

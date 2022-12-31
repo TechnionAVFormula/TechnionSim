@@ -215,6 +215,8 @@ class EUFSLauncher(Plugin):
     @staticmethod
     def setup_q_combo_box(q_combo_box, default_mode, modes):
         q_combo_box.clear()
+        if default_mode == "None":
+            q_combo_box.addItem(default_mode)
         if default_mode in modes:
             q_combo_box.addItem(default_mode)
         for mode in modes:
