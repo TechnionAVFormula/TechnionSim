@@ -18,6 +18,7 @@ setup(
         (share_directory, ['package.xml']),
         ('share/ament_index/resource_index/packages',
          ['resource/' + package_name]),
+        (join(share_directory, 'custom_launch_files'), glob('custom_launch_files/*.launch.py')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
