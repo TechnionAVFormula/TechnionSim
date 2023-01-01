@@ -7,12 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Simulate Bounding Boxes plugin
 - Simulated multi-camera setup plugin 
-- Noisy cone colors in simulated_perception
+- Noisy cone colors in simulated perception
 - Robot selection in launcher GUI
 - Refresh button in launcher GUI
 - Create stop ground truth pub button
 - New tracks
 - Question issue template
+- IMU for ZED Camera
 
 ### Changed
 - New ADS-DV mesh
@@ -22,14 +23,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Topic prefix for sensors
 - Revise track generation
 - Launcher module structure
-- Default RVIZ reliability policy from `Reliable` to `Best Effort`
-- RQT defaults to `/cmd` topic
+- Robot Steering GUI defaults to `/cmd` topic
 - Replace the `/ros_can/set_mission` topic with an equivalent service
 - Reduce Artifact overhead in CI pipeline
 
 ### Fixed
 - Robot model "sinks" in RVIZ
-- `base_footprint` position adjusted
+- `base_footprint` position adjusted to ground level
 - Add missing dependencies in eufs_sensors
 - Transform frame for the depth camera
 - setup.cfg deprecation warnings
