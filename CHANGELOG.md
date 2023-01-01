@@ -30,7 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Robot model "sinks" in RVIZ
 - `base_footprint` position adjusted
-- Add missing dependencies on eufs_sensors
+- Add missing dependencies in eufs_sensors
 - Transform frame for the depth camera
 - setup.cfg deprecation warnings
 - Removed x velocity clipping in vehicle model
