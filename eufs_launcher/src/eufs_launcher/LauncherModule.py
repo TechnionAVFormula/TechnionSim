@@ -176,7 +176,7 @@ class EUFSLauncher(Plugin):
         checkboxes = OrderedDict(
             sorted(
                 self.default_config["eufs_launcher"]["checkboxes"].items(),
-                key=lambda x: x[1]["priority"],
+                key=lambda x: x[1]["priority"]
             )
         )
         self.checkbox_effect_mapping = []
