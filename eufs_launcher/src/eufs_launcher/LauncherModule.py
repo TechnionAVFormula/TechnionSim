@@ -262,7 +262,7 @@ class EUFSLauncher(Plugin):
                     geom.x() * scalar_multiplier,
                     geom.y() * scalar_multiplier,
                     new_width,
-                    geom.height() * (scalar_multiplier),
+                    geom.height() * (scalar_multiplier)
                 )
 
         # If use_gui is false, we jump straight into launching the track
