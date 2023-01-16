@@ -154,9 +154,14 @@ class EUFSLauncher(Plugin):
         )
 
         # Setup launch file options
+        # TODO (Khalid): Create configurable launch file folder
+        # TODO (Khalid): Error handling if folder not found
         launch_files = []
+        default_launch_folder = self.default_config["eufs_launcher"][
+            "default_launch_folder"
+        ]
         custom_launch_folder = join(
-            get_package_share_directory("eufs_launcher"), "custom_launch_files"
+            get_package_share_directory("eufs_launcher"), default_launch_folder
         )
         launch_files.extend(
             [
@@ -333,8 +338,6 @@ class EUFSLauncher(Plugin):
         model_config = self.MODEL_CONFIGS[self.MODEL_PRESET_MENU.currentText()]
         vehicle_model_config = f"vehicleModelConfig:={model_config}"
         robot_name = f"robot_name:={self.ROBOT_NAME_MENU.currentText()}"
-        launch_file_description = f"{self.LAUNCH_FILE_SELECTOR.currentText()}"
-        # launch_file_description = launch_file_description.split('/')
         parameters_to_pass = [
             track_layout,
             vehicle_model,
@@ -376,6 +379,7 @@ class EUFSLauncher(Plugin):
         self.launch_with_args(
             "eufs_launcher", "simulation.launch.py", parameters_to_pass
         )
+        launch_file_description = f"{self.LAUNCH_FILE_SELECTOR.currentText()}"
         self.roslaunch_launch_file(launch_file_description)
 
         # Trigger launch files hooked to checkboxes
