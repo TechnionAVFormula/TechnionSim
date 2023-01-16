@@ -163,13 +163,11 @@ class EUFSLauncher(Plugin):
         custom_launch_folder = join(
             get_package_share_directory("eufs_launcher"), default_launch_folder
         )
-        launch_files.extend(
-            [
+        launch_files = [
                 file
                 for file in listdir(custom_launch_folder)
                 if file.endswith("launch.py")
             ]
-        )
         default_launch_file = self.default_config["eufs_launcher"][
             "default_launch_file"
         ]
