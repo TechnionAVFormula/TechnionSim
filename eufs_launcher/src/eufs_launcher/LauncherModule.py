@@ -181,7 +181,7 @@ class EUFSLauncher(Plugin):
         checkboxes = OrderedDict(
             sorted(
                 self.default_config["eufs_launcher"]["checkboxes"].items(),
-                key=lambda x: x[1]["priority"],
+                key=lambda x: x[1]["priority"]
             )
         )
         self.checkbox_effect_mapping = []
@@ -267,7 +267,7 @@ class EUFSLauncher(Plugin):
                     geom.x() * scalar_multiplier,
                     geom.y() * scalar_multiplier,
                     new_width,
-                    geom.height() * (scalar_multiplier),
+                    geom.height() * (scalar_multiplier)
                 )
 
         # If use_gui is false, we jump straight into launching the track
