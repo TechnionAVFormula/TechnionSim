@@ -28,7 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Reduce Artifact overhead in CI pipeline
 
 ### Fixed
-- Robot model "sinks" in RVIZ
+- Robot model no longer "sinks" in RVIZ
 - `base_footprint` position adjusted to ground level
 - Add missing dependencies in eufs_sensors
 - Transform frame for the depth camera
