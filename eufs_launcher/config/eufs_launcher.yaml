@@ -19,9 +19,11 @@ eufs_launcher:
   default_robot_name: "eufs"
 
   # Default launch folder to search for all custom launch files
-  default_launch_directory: "custom_launch_files"
+  # Environment variable is also allowed
+  default_launch_directory: "$EUFS_MASTER/launch"
 
   # Default launch file to be selected in the launcher drop-down menu
+  # Set value to "None" if no launch file should be selected by default
   default_launch_file: "None"
 
   # percent of possible noise pixels being utilized

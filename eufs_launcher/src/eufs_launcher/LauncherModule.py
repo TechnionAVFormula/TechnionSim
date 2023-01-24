@@ -119,23 +119,23 @@ class EUFSLauncher(Plugin):
         EUFSLauncher.setup_q_combo_box(self.ROBOT_NAME_MENU, default_mode, modes)
 
         # Setup launch file options
+        # TODO (Khalid): Use os.environ.get to allow user to specify any directory
+        # See comment no. 4: https://stackoverflow.com/questions/431684/equivalent-of-shell-cd-command-to-change-the-working-directory
         launch_files = []
-        default_launch_directory = self.default_config["eufs_launcher"][
+        launch_directory_path = self.default_config["eufs_launcher"][
             "default_launch_directory"
         ]
-        custom_launch_directory = join(
-            get_package_share_directory("eufs_launcher"), default_launch_directory
-        )
-        if path.exists(custom_launch_directory):
+        launch_directory_path = path.expandvars(launch_directory_path)
+        if path.exists(launch_directory_path):
             launch_files = [
                 file
-                for file in listdir(custom_launch_directory)
+                for file in listdir(launch_directory_path)
                 if file.endswith("launch.py")
             ]
         else:
-            self.logger.info(
-                "Custom launch directory not found. Please check that the default " + 
-                f"launch directory in {default_config_path} is correct."
+            self.logger.warning(
+                "Custom launch directory not found. Please check that the path " + 
+                f"specified for the default launch directory in {default_config_path} is correct."
             )
 
         default_launch_file = self.default_config["eufs_launcher"][
@@ -239,7 +239,7 @@ class EUFSLauncher(Plugin):
     def setup_q_combo_box(q_combo_box, default_mode, modes):
         q_combo_box.clear()
         # None option is added for the use of launch files selector
-        if default_mode == "None":
+        if default_mode.lower() == "none":
             q_combo_box.addItem(default_mode)
         if default_mode in modes:
             q_combo_box.addItem(default_mode)
