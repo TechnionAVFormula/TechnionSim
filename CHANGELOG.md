@@ -5,7 +5,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.1.0] - 2023-01-01
 ### Added
-- Simulate Bounding Boxes plugin
+- Simulated bounding boxes plugin
 - Simulate multi-camera setup plugin 
 - Noisy cone colors in simulated perception
 - Robot selection in launcher GUI
