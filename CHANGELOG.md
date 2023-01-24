@@ -25,7 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Launcher module structure
 - Robot Steering GUI defaults to `/cmd` topic
 - Replace the `/ros_can/set_mission` topic with an equivalent service
-- Reduce Artifact overhead in CI pipeline
+- Reduce artifact overhead in CI pipeline
 
 ### Fixed
 - Robot model no longer "sinks" in RVIZ
