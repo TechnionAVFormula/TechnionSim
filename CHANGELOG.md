@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Simulate multi-camera setup plugin 
 - Noisy cone colors in simulated perception
 - Robot selection in launcher GUI
-- Refresh button in launcher GUI
+- Track refresh button in launcher GUI
 - Create stop ground truth pub button
 - New tracks
 - Question issue template
