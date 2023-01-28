@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New ADS-DV mesh
 - Sensor positions for the ADS-DV robot
 - Simulated perception topic to `/cones` from `/fusion/cones`
-- `base_link` changed to `chassis`
+- `base_link` renamed to `chassis`
 - Topic prefix for sensors
 - Revise track generation
 - Launcher module structure
