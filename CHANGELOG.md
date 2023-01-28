@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Noisy cone colors in simulated perception
 - Robot selection in launcher GUI
 - Track refresh button in launcher GUI
-- Create stop ground truth pub button
+- Stop ground truth pub button in launcher GUI
 - New tracks
 - Question issue template
 - IMU for ZED Camera
