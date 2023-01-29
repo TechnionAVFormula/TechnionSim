@@ -120,8 +120,6 @@ class EUFSLauncher(Plugin):
         EUFSLauncher.setup_q_combo_box(self.ROBOT_NAME_MENU, default_mode, modes)
 
         # Setup launch file options
-        # TODO (Khalid): Use os.environ.get to allow user to specify any directory
-        # See comment no. 4: https://stackoverflow.com/questions/431684/equivalent-of-shell-cd-command-to-change-the-working-directory
         launch_files = []
         launch_directory_path = self.default_config["eufs_launcher"][
             "default_launch_directory"
