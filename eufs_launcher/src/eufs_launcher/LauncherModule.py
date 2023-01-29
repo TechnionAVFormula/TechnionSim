@@ -396,17 +396,34 @@ class EUFSLauncher(Plugin):
         process = Popen(command)
         self.popens.append(process)
 
-    def roslaunch_launch_file(self, launch_file):
+    def roslaunch_launch_file(self, launch_file_description):
         """
         Launches custom launch file
 
-        Custom launch files should be placed inside the "custom_launch_files"
-        folder.
+        launch_file_description can be of 3 forms:
+        - ['None']
+        - ['launch/file.launch.py']
+        - ['package/file.launch.py']
         """
-        if launch_file == "None":
+
+        # Process launch file description
+        temp = launch_file_description.split('/')
+ 
+        if "None" in temp:
             self.logger.info(f"No additional launch file will be launched.")
+
+        # If the .launch.py file is within the launch folder in the top-level directory
+        # the command to launch the launch file is a bit different
+        # e.g. ros2 launch launch/simulation.launch.py
+        elif "launch" in temp:
+            command = ["ros2", "launch", temp]
+            self.logger.info(f"Command: {' '.join(command)}")
+            process = Popen(command) 
+            self.popens.append(process)
+
         else:
-            command = ["ros2", "launch", "eufs_launcher", launch_file]
+            package, file = temp[0], temp[1]
+            command = ["ros2", "launch", package, file]
             self.logger.info(f"Command: {' '.join(command)}")
             process = Popen(command)
             self.popens.append(process)
