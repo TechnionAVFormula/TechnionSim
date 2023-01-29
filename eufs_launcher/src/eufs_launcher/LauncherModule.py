@@ -4,6 +4,7 @@ from os import listdir
 from os import path
 from os.path import join
 from os.path import isfile
+from os import walk, getenv
 from subprocess import Popen
 
 from ament_index_python.packages import get_package_share_directory
@@ -126,17 +127,57 @@ class EUFSLauncher(Plugin):
             "default_launch_directory"
         ]
         launch_directory_path = path.expandvars(launch_directory_path)
-        if path.exists(launch_directory_path):
-            launch_files = [
-                file
-                for file in listdir(launch_directory_path)
-                if file.endswith("launch.py")
-            ]
+
+        # TODO(Khalid): Make it more dynamic
+        # TODO(Khalid): Submodule may be a bit misleading since it is actually the top level directory of each subteams
+        submodules = ["control", "simulation", "localisation", "perception", "infrastructure"]
+
+        # Check that path provided by the user ends with submodule
+        if launch_directory_path.split('/')[-1].lower() in submodules:
+            submodule_search_flag = True
         else:
-            self.logger.warning(
-                "Custom launch directory not found. Please check that the path " + 
-                f"specified for the default launch directory in {default_config_path} is correct."
-            )
+            submodule_search_flag = False
+
+        if submodule_search_flag:
+            submodule_packages = listdir(launch_directory_path)
+            for i, package in enumerate(submodule_packages):
+                submodule_packages_path = (join(launch_directory_path, package))
+                for directory_path, directory_name, files in walk(submodule_packages_path):
+                    for file in files:
+
+                        if file.endswith(".launch.py"):
+                            launch_files.append(f"{package}/{file}")
+
+        # Process all submodules under eufs-master
+        eufs_master_path = getenv('EUFS_MASTER')
+        if launch_directory_path == eufs_master_path:
+
+            for directory_path, directory_name, files in walk(launch_directory_path):
+
+                for file in files:
+                    if file.endswith(".launch.py"):
+                        if "build" not in directory_path and "install" not in directory_path:
+
+                            temp = directory_path.split('/')
+                            temp.pop(0)
+
+                            eufs_master_split = eufs_master_path.split('/')
+                            eufs_master_split.pop(0)
+                            n = len(eufs_master_split)
+
+                            # When getting the directory path, the output is essentially
+                            # $EUFS_MASTER/src/<submodule>/<package>
+                            # Remember that $EUFS_MASTER path may be different for everyone, hence the method implemented here is
+                            # to ensure that it works regardless of different eufs-master path
+                            # The 5th element corresponds to the submodule, whereas the 6th element
+                            # corresponds to the package. There will be instances where python searches
+                            # launch files not in a submodule which would break the following structure.
+                            # Hence, the use of try and exception to catch this.
+                            try:
+                                if temp[(n - 1) + 2] in submodules:
+                                    launch_files.append(join(temp[(n - 1) + 3], file))
+                            except IndexError:
+                                launch_files.append(join('launch', file))
 
         default_launch_file = self.default_config["eufs_launcher"][
             "default_launch_file"
