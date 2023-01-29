@@ -128,9 +128,9 @@ class EUFSLauncher(Plugin):
         ]
         launch_directory_path = path.expandvars(launch_directory_path)
 
-        # TODO(Khalid): Make it more dynamic
-        # TODO(Khalid): Submodule may be a bit misleading since it is actually the top level directory of each subteams
-        submodules = ["control", "simulation", "localisation", "perception", "infrastructure"]
+        eufs_master_path = getenv('EUFS_MASTER')
+        eufs_master_src = join(eufs_master_path, 'src')
+        submodules = listdir(eufs_master_src)
 
         # Check that path provided by the user ends with submodule
         if launch_directory_path.split('/')[-1].lower() in submodules:
@@ -149,7 +149,6 @@ class EUFSLauncher(Plugin):
                             launch_files.append(f"{package}/{file}")
 
         # Process all submodules under eufs-master
-        eufs_master_path = getenv('EUFS_MASTER')
         if launch_directory_path == eufs_master_path:
 
             for directory_path, directory_name, files in walk(launch_directory_path):
