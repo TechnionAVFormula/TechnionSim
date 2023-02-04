@@ -16,12 +16,12 @@ tire:
   tire_coefficient: 1.0
   B: 15.07
   C: -1.66
-  D: 0.8
+  D: 0.6
   E: -0.58
   radius: 0.2525
 
 aero:
-  C_Down: 1.9 # F_Downforce = C_Downforce*v_x^2
+  C_Down: 0.0 # F_Downforce = C_Downforce*v_x^2
   C_drag: 1 # F_Drag = C_Drag*v_x^2
 
 input_ranges:
