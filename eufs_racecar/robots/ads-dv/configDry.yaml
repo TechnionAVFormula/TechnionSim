@@ -16,7 +16,7 @@ tire:
   tire_coefficient: 1.0
   B: 12.56
   C: -1.38
-  D: 1.60
+  D: 0.8
   E: -0.58
   radius: 0.2525
 
