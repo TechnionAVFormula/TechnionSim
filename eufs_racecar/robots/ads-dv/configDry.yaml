@@ -26,8 +26,8 @@ aero:
 
 input_ranges:
   acceleration:
-    max: 2.6
-    min: -2.6
+    max: 5.2
+    min: -5.2
   velocity:
     max: 30
     min: 0
