@@ -4,8 +4,10 @@ from os import listdir
 from os import path
 from os.path import join
 from os.path import isfile
+from os.path import expandvars
 from os import walk, getenv
 from subprocess import Popen
+from glob import glob
 
 from ament_index_python.packages import get_package_share_directory
 from python_qt_binding import loadUi
@@ -119,26 +121,29 @@ class EUFSLauncher(Plugin):
         modes = listdir(robots_filepath)
         EUFSLauncher.setup_q_combo_box(self.ROBOT_NAME_MENU, default_mode, modes)
 
-        import os
-        import glob
-         
         # Setup launch file options
         launch_files = []
         launch_directory_path = self.default_config["eufs_launcher"][
             "default_launch_directory"
         ]
-         
+        
+        # Check if user wants to extract all launch files within the specified directory
         if launch_directory_path.split('/')[-1] == '**':
-            launch_directory_path = os.path.join(os.path.expandvars(launch_directory_path),'*.launch.py')
+            launch_directory_path = join(expandvars(launch_directory_path),'*.launch.py')
             recursive_flag = True
         else:
-            launch_directory_path = os.path.join(os.path.expandvars(launch_directory_path),'**' ,'*.launch.py')
+            launch_directory_path = join(expandvars(launch_directory_path),'**' ,'*.launch.py')
             recursive_flag = False
-        all_files = glob.glob(launch_directory_path, recursive=recursive_flag)
+
+        # If ** is specified, recursively search for .launch.py file within the directory
+        all_files = glob(launch_directory_path, recursive=recursive_flag)
+
+        # Filter launch files found within install or build directory
         launch_files = [file for file in all_files if not ('install' in file or 'build' in file)]
         default_launch_file = self.default_config["eufs_launcher"][
             "default_launch_file"
         ]
+        default_launch_file = expandvars(default_launch_file)
         EUFSLauncher.setup_q_combo_box(
             self.LAUNCH_FILE_SELECTOR, default_launch_file, launch_files
         )
