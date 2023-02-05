@@ -119,63 +119,23 @@ class EUFSLauncher(Plugin):
         modes = listdir(robots_filepath)
         EUFSLauncher.setup_q_combo_box(self.ROBOT_NAME_MENU, default_mode, modes)
 
+        import os
+        import glob
+         
         # Setup launch file options
         launch_files = []
         launch_directory_path = self.default_config["eufs_launcher"][
             "default_launch_directory"
         ]
-        launch_directory_path = path.expandvars(launch_directory_path)
-
-        eufs_master_path = getenv('EUFS_MASTER')
-        eufs_master_src = join(eufs_master_path, 'src')
-        submodules = listdir(eufs_master_src)
-
-        # Check that path provided by the user ends with submodule
-        if launch_directory_path.split('/')[-1].lower() in submodules:
-            submodule_search_flag = True
+         
+        if launch_directory_path.split('/')[-1] == '**':
+            launch_directory_path = os.path.join(os.path.expandvars(launch_directory_path),'*.launch.py')
+            recursive_flag = True
         else:
-            submodule_search_flag = False
-
-        if submodule_search_flag:
-            submodule_packages = listdir(launch_directory_path)
-            for i, package in enumerate(submodule_packages):
-                submodule_packages_path = (join(launch_directory_path, package))
-                for directory_path, directory_name, files in walk(submodule_packages_path):
-                    for file in files:
-
-                        if file.endswith(".launch.py"):
-                            launch_files.append(f"{package}/{file}")
-
-        # Process all submodules under eufs-master
-        if launch_directory_path == eufs_master_path:
-
-            for directory_path, directory_name, files in walk(launch_directory_path):
-
-                for file in files:
-                    if file.endswith(".launch.py"):
-                        if "build" not in directory_path and "install" not in directory_path:
-
-                            temp = directory_path.split('/')
-                            temp.pop(0)
-
-                            eufs_master_split = eufs_master_path.split('/')
-                            eufs_master_split.pop(0)
-                            n = len(eufs_master_split)
-
-                            # When getting the directory path, the output is essentially
-                            # $EUFS_MASTER/src/<submodule>/<package>
-                            # Remember that $EUFS_MASTER path may be different for everyone, hence the method implemented here is
-                            # to ensure that it works regardless of different eufs-master path
-                            # The 5th element corresponds to the submodule, whereas the 6th element
-                            # corresponds to the package. There will be instances where python searches
-                            # launch files not in a submodule which would break the following structure.
-                            # Hence, the use of try and exception to catch this.
-                            try:
-                                if temp[(n - 1) + 2] in submodules:
-                                    launch_files.append(join(temp[(n - 1) + 3], file))
-                            except IndexError:
-                                launch_files.append(join('launch', file))
-
+            launch_directory_path = os.path.join(os.path.expandvars(launch_directory_path),'**' ,'*.launch.py')
+            recursive_flag = False
+        all_files = glob.glob(launch_directory_path, recursive=recursive_flag)
+        launch_files = [file for file in all_files if not ('install' in file or 'build' in file)]
         default_launch_file = self.default_config["eufs_launcher"][
             "default_launch_file"
         ]
@@ -396,31 +356,14 @@ class EUFSLauncher(Plugin):
     def roslaunch_launch_file(self, launch_file_description):
         """
         Launches custom launch file
-
-        launch_file_description can be of 3 forms:
-        - ['None']
-        - ['launch/file.launch.py']
-        - ['package/file.launch.py']
         """
-
         # Process launch file description
-        temp = launch_file_description.split('/')
  
-        if "None" in temp:
+        if "None" in launch_file_description:
             self.logger.info(f"No additional launch file will be launched.")
-
-        # If the .launch.py file is within the launch folder in the top-level directory
-        # the command to launch the launch file is a bit different
-        # e.g. ros2 launch launch/simulation.launch.py
-        elif "launch" in temp:
-            command = ["ros2", "launch", temp]
-            self.logger.info(f"Command: {' '.join(command)}")
-            process = Popen(command) 
-            self.popens.append(process)
-
         else:
-            package, file = temp[0], temp[1]
-            command = ["ros2", "launch", package, file]
+            path = launch_file_description
+            command = ["ros2", "launch", path]
             self.logger.info(f"Command: {' '.join(command)}")
             process = Popen(command)
             self.popens.append(process)

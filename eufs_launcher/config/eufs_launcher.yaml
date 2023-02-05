@@ -20,7 +20,7 @@ eufs_launcher:
 
   # Default launch folder to search for all custom launch files
   # Environment variable is also allowed
-  default_launch_directory: "$EUFS_MASTER"
+  default_launch_directory: "$EUFS_MASTER/src/**"
 
   # Default launch file to be selected in the launcher drop-down menu
   # Set value to "None" if no launch file should be selected by default
