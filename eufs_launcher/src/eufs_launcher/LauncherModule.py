@@ -360,7 +360,7 @@ class EUFSLauncher(Plugin):
         # Process launch file description
  
         if "None" in launch_file_description:
-            self.logger.info(f"No additional launch file will be launched.")
+            self.logger.info("No additional launch file will be launched.")
         else:
             path = launch_file_description
             command = ["ros2", "launch", path]
