@@ -31,7 +31,7 @@ eufs_launcher:
   # └── file1.launch.py
   # $HOME/example -> file1.launch.py
   # $HOME/example/** -> file1.launch.py, file2.launch.py, file3.launch.py  
-  default_launch_directory: "$EUFS_MASTER/src/**"
+  default_launch_directory: "$EUFS_MASTER/launch/**"
 
   # Default launch file to be selected in the launcher drop-down menu
   # Set value to "None" if no launch file should be selected by default
