@@ -35,7 +35,7 @@ eufs_launcher:
 
   # Default launch file to be selected in the launcher drop-down menu
   # Set value to "None" if no launch file should be selected by default
-  # Add absolute path of the desired launch file
+  # Otherwise, add absolute path of the desired launch file
   # Example: $EUFS_MASTER/launch/simulation.launch.py
   default_launch_file: "None"
 
