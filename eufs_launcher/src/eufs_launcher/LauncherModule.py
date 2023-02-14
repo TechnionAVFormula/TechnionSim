@@ -362,8 +362,7 @@ class EUFSLauncher(Plugin):
         if "None" in launch_file_description:
             self.logger.info("No additional launch file will be launched.")
         else:
-            path = launch_file_description
-            command = ["ros2", "launch", path]
+            command = ["ros2", "launch", launch_file_description]
             self.logger.info(f"Command: {' '.join(command)}")
             process = Popen(command)
             self.popens.append(process)
