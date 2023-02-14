@@ -18,7 +18,7 @@ eufs_launcher:
   # Default robot urdf to be selected in the launcher drop-down menu
   default_robot_name: "eufs"
 
-  # Default launch folder to search for all custom launch files
+  # Default folder to search for all custom launch files
   # Environment variable is also allowed
   # Use '**' at the end to recursively search for all launch files on all level
   # If it is not specified, then it will only search for launch files within the directory
