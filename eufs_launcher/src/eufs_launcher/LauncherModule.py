@@ -128,18 +128,13 @@ class EUFSLauncher(Plugin):
         ]
         
         # Check if user wants to extract all launch files within the specified directory
-        if launch_directory_path.split('/')[-1] == '**':
-            launch_directory_path = join(expandvars(launch_directory_path),'*.launch.py')
-            recursive_flag = True
-        else:
-            launch_directory_path = join(expandvars(launch_directory_path),'**' ,'*.launch.py')
-            recursive_flag = False
-
+        launch_directory_path = join(expandvars(launch_directory_path),'*.launch.py')
         # If ** is specified, recursively search for .launch.py file within the directory
-        all_files = glob(launch_directory_path, recursive=recursive_flag)
+        all_files = glob(launch_directory_path, recursive=True)
 
         # Filter launch files found within install or build directory
         launch_files = [file for file in all_files if not ('install' in file or 'build' in file)]
+
         default_launch_file = self.default_config["eufs_launcher"][
             "default_launch_file"
         ]
