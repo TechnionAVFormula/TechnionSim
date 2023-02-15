@@ -359,7 +359,7 @@ class EUFSLauncher(Plugin):
         """
         # Process launch file description
  
-        if "None" in launch_file_description:
+        if "none" in launch_file_description.lower():
             self.logger.info("No additional launch file will be launched.")
         else:
             command = ["ros2", "launch", launch_file_description]
