@@ -75,4 +75,8 @@
         <origin xyz="-0.08 0.0 0.76" rpy="0 0 0"/>
     </xacro:sensor_imu>
 
+    <xacro:sensor_magnetometer parent="chassis" prefix="sbg">
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+    </xacro:sensor_magnetometer>
+
 </robot>
