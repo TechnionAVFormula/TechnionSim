@@ -122,7 +122,6 @@ class EUFSLauncher(Plugin):
         EUFSLauncher.setup_q_combo_box(self.ROBOT_NAME_MENU, default_mode, modes)
 
         # Setup launch file options
-        launch_files = []
         launch_directory_path = self.default_config["eufs_launcher"][
             "default_launch_directory"
         ]
