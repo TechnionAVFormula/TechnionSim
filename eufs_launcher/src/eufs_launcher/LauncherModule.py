@@ -239,7 +239,7 @@ class EUFSLauncher(Plugin):
         # None option is added for the use of launch files selector
         if default_mode.lower() == "none":
             q_combo_box.addItem(default_mode)
-        if default_mode in modes:
+        elif default_mode in modes:
             q_combo_box.addItem(default_mode)
         for mode in modes:
             if mode != default_mode:
@@ -328,8 +328,8 @@ class EUFSLauncher(Plugin):
         self.launch_with_args(
             "eufs_launcher", "simulation.launch.py", parameters_to_pass
         )
-        launch_file_description = f"{self.LAUNCH_FILE_SELECTOR.currentText()}"
-        self.roslaunch_launch_file(launch_file_description)
+
+        self.roslaunch_launch_file(self.LAUNCH_FILE_SELECTOR.currentText())
 
         # Trigger launch files hooked to checkboxes
         for checkbox, effect_on, effect_off in self.checkbox_effect_mapping:
