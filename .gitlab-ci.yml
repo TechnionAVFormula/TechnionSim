@@ -11,7 +11,7 @@ variables:
   #       OR look in your browser url for the path
   # - EXAMPLE USAGE:
   #     DEPENDENCIES: eufs/infrastructure_group/eufs_msgs eufs/<insert subgroup name here>/<insert project title here>@<insert branch or version>
-  DEPENDENCIES:
+  DEPENDENCIES: eufs/infrastructure_group/eufs_msgs
 
 include:
   - project: 'eufs/infrastructure_group/eufs_ci'
