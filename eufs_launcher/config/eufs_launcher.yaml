@@ -18,6 +18,27 @@ eufs_launcher:
   # Default robot urdf to be selected in the launcher drop-down menu
   default_robot_name: "eufs"
 
+  # Default folder to search for all custom launch files
+  # Environment variable is also allowed
+  # Use '**' at the end to recursively search for all launch files
+  # If it is not specified, then it will only search for launch files within the directory
+  # Example: 
+  #  example
+  # ├── dir_A
+  # │   └── file2.launch.py
+  # ├── dir_B
+  # │   └── file3.launch.py
+  # └── file1.launch.py
+  # $HOME/example -> file1.launch.py
+  # $HOME/example/** -> file1.launch.py, file2.launch.py, file3.launch.py  
+  default_launch_directory: "$EUFS_MASTER/launch/**"
+
+  # Default launch file to be selected in the launcher drop-down menu
+  # Set value to "None" if no launch file should be selected by default
+  # Otherwise, add absolute path of the desired launch file
+  # Example: $EUFS_MASTER/launch/simulation.launch.py
+  default_launch_file: "None"
+
   # percent of possible noise pixels being utilized
   object_noise_default: 0
 
