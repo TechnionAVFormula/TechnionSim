@@ -1,16 +1,4 @@
 variables:
-  # TODO: Add dependencies and dependency versions
-  # - Check source code for dependency on other eufs repositories
-  # - If there are no dependencies, leave the DEPENDENCIES variable empty
-  # - If there are dependencies, add all paths to the needed repositories in a
-  #   space separated list in the DEPENDENCIES variable
-  #     - make sure you also add dependencies of dependencies of the current repository as these will not be automatically cloned
-  #     - To use the default version of a repo, the item must have the structure <eufs/path/to/repo>
-  #     - To specify a version or branch of the repo to clone, each tuple must have the structure <eufs/path/to/repo>@<branch_or_version>
-  #     - The path can be found by going to the repository -> "Clone" -> "Clone with HTTPS" and use the part indicated here: "https://gitlab.com/<copy this>.git"
-  #       OR look in your browser url for the path
-  # - EXAMPLE USAGE:
-  #     DEPENDENCIES: eufs/infrastructure_group/eufs_msgs eufs/<insert subgroup name here>/<insert project title here>@<insert branch or version>
   DEPENDENCIES: eufs/infrastructure_group/eufs_msgs
 
 include:
