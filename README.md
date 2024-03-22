@@ -1,4 +1,6 @@
-# eufs_sim
+# taf_sim
+
+This is a fork of the original EUFS Simulator 
 
 ## What is eufs_sim?
 
