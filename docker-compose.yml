@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  simulator:
+    image: eufs_sim
+    build:
+      context: .
+      args:
+        - PLATFORM=${PLATFORM}
+    environment:
+      - DISPLAY=docker.for.mac.host.internal:0 
+    volumes:
+      - "~/.Xauthority:/root/.Xauthority"
+      - "/tmp/.X11-unix:/tmp/.X11-unix"
+      - "./scripts/eufs_simulator.desktop:/home/ubuntu/Desktop/eufs_simulator.desktop"
+    ports:
+      - "6080:80"
+    # shm
+    privileged: true

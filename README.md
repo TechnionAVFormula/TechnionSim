@@ -31,6 +31,20 @@ Finally, a series of quick fixes for eufs_sim are listed [on this page](https://
 
 For installation, setup, and initial launching, refer to the [Getting Started Guide](https://gitlab.com/eufs/eufs_sim/-/wikis/Getting-Started-Guide) on the Wiki.
 
+## Technion Installation and Setup
+
+1. Install Docker
+2. Clone the repository
+3. Run the following commands:
+```bash
+./setup.sh
+```
+
+4. Open your browser at the following address: 
+```bash
+http://127.0.0.1:6080/
+```
+
 ## Packages
 
 This project contains a number of packages. The package READMEs supply information about the package API (launch parameters, ROS 2 publishers, subscribers and services).
