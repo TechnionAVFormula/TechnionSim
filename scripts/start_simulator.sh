@@ -1,6 +1,8 @@
+#!/bin/bash
+
+# Source the necessary setup scripts
 source ~/.bashrc
-# cd eufs
-# colcon build
 source /opt/ros/galactic/setup.bash
+cd $EUFS_MASTER
 source install/setup.bash
 ros2 launch eufs_launcher eufs_launcher.launch.py

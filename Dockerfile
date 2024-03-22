@@ -1,4 +1,4 @@
-FROM osrf/ros:galactic-desktop
+FROM tiryoh/ros2-desktop-vnc:galactic
 
 SHELL ["/bin/bash", "-c"]
 
@@ -42,7 +42,9 @@ RUN . /opt/ros/galactic/setup.bash && \
 # Expose the default port for ROS
 EXPOSE 11311
 
-ADD start_simulator.sh /
+# add user named tavf
 
-# open a shell as the container's entrypoint
-CMD ["/bin/bash"]
+RUN chmod -R 777 /eufs
+
+
+

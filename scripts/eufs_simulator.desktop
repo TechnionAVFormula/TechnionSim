@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Terminal=true
+Name=simulator
+Exec=/eufs/scripts/start_simulator.sh
+Icon=/eufs/scripts/resources/logo.png
+Path=/eufs

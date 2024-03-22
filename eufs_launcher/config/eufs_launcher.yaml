@@ -77,7 +77,7 @@ eufs_launcher:
       priority: 3
       name: "Gazebo_GUI_Checkbox"
       label: "Gazebo GUI"
-      checked_on_default: No
+      checked_on_default: Yes
       parameter_triggering:
         if_on: { "gazebo_gui:=true" }
         if_off: { "gazebo_gui:=false" }
