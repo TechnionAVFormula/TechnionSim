@@ -1,4 +1,4 @@
-# taf_sim
+# Technion Sim
 
 This is a fork of the original EUFS Simulator 
 
