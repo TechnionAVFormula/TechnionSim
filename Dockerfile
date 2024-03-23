@@ -2,6 +2,9 @@ FROM tiryoh/ros2-desktop-vnc:galactic
 
 SHELL ["/bin/bash", "-c"]
 
+# Add the missing GPG key for Google Chrome
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys E88979FB9B30ACF2
+
 RUN apt-get update && apt-get install -y \
     python3-pip \
     tmux \
