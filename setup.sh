@@ -8,8 +8,13 @@ else
     export PLATFORM="linux/amd64"
 fi
 
-# Export DISPLAY for X11 forwarding
-export DISPLAY=:0
+# ensures no dangling containers are blocking the port
+docker stop $(docker ps -q --filter "publish=6080")
+
+ docker build -t eufs_sim .
 
 # Run docker-compose
-docker-compose up --build
+docker run -d --privileged -p 6080:80 -v "$(pwd)/scripts/eufs_simulator.desktop:/home/ubuntu/Desktop/eufs_simulator.desktop"  eufs_sim:latest
+
+
+
