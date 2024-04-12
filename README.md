@@ -1,6 +1,6 @@
 # Technion Sim
 
-This is a fork of the original EUFS Simulator 
+This is a fork of the original EUFS Simulator, now completely portable with a fully automatic CI!
 
 ## What is eufs_sim?
 
